@@ -35,7 +35,7 @@ jobs:
 
       - name: Setup upterm session
         uses: lhotari/action-upterm@v1
-        timeout-minutes: 30*5
+        timeout-minutes: 30
         with:
           authorized-keys: ${{ steps.read_pub_key.outputs.pub_key }}
           # limit-access-to-actor: true #Limits SSH access to the user who triggered the workflow.
