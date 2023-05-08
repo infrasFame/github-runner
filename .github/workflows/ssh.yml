@@ -1,14 +1,10 @@
-# This is a basic workflow to help you get started with Actions
-
 name: SSH
 
 # concurrency:
 #   group: ssh
 #   cancel-in-progress: true
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
   pull_request:
@@ -27,23 +23,21 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      # - name: Run a multi-line script
-      #   run: |
-      #     mkdir -p ~/.ssh
-      #     touch ~/.ssh/authorized_keys
+      - name: Read authorized public key
+        id: read_pub_key
+        run: |
+         echo "::set-output name=pub_key::$(cat authorized_key.pub)"
 
       - name: Setup upterm session
         uses: lhotari/action-upterm@v1
+        with:
+          authorized-keys: ${{ steps.read_pub_key.outputs.pub_key }}
+
+
 
       # - name: Run endless
       #   run: |
