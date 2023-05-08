@@ -1,6 +1,10 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: SSH
+
+concurrency:
+  group: ssh
+  cancel-in-progress: true
 
 # Controls when the workflow will run
 on:
@@ -12,6 +16,9 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+  schedule:
+    - cron: '*/20 * * * *'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -30,8 +37,16 @@ jobs:
         run: echo Hello, world!
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      # - name: Run a multi-line script
+      #   run: |
+      #     mkdir -p ~/.ssh
+      #     touch ~/.ssh/authorized_keys
+
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
+
+      - name: Run endless
         run: |
-          mkdir -p ~/.ssh
-          touch ~/.ssh/authorized_keys
+          echo "Sleeping"
+          sleep 21600; #6hours
 
