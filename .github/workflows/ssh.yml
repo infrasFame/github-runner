@@ -2,9 +2,9 @@
 
 name: SSH
 
-concurrency:
-  group: ssh
-  cancel-in-progress: true
+# concurrency:
+#   group: ssh
+#   cancel-in-progress: true
 
 # Controls when the workflow will run
 on:
@@ -18,7 +18,7 @@ on:
   workflow_dispatch:
 
   schedule:
-    - cron: '*/20 * * * *'
+    - cron: '* */5 * * *'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
