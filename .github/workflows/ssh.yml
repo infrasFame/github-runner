@@ -23,7 +23,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  upterm:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -45,8 +45,8 @@ jobs:
       - name: Setup upterm session
         uses: lhotari/action-upterm@v1
 
-      - name: Run endless
-        run: |
-          echo "Sleeping"
-          sleep 21600; #6hours
+      # - name: Run endless
+      #   run: |
+      #     echo "Sleeping"
+      #     sleep 21600; #6hours
 
