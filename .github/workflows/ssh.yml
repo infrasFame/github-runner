@@ -1,8 +1,8 @@
 name: SSH
 
-concurrency:
-  group: ssh
-  cancel-in-progress: true
+# concurrency:
+#   group: ssh
+#   cancel-in-progress: true #not required as its manually triggernd
 
 on:
   push:
@@ -10,22 +10,21 @@ on:
   pull_request:
     branches: [ "main" ]
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-  schedule:
-    - cron: '* */5 * * *'
+  # schedule:
+  #   - cron: '* */5 * * *'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   upterm:
-    # The type of runner that the job will run on
+    # if: false #use to disable the job
+
     runs-on: ubuntu-latest
     # timeout-minutes: 30 #https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idtimeout-minutes
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
       - name: Read authorized public key
@@ -35,7 +34,7 @@ jobs:
 
       - name: Setup upterm session
         uses: lhotari/action-upterm@v1
-        timeout-minutes: 30
+        # timeout-minutes: 30
         with:
           ssh-known-hosts: ${{ steps.read_pub_key.outputs.pub_key }}
           # limit-access-to-actor: true #Limits SSH access to the user who triggered the workflow.
@@ -43,7 +42,7 @@ jobs:
 
 
 
-      # - name: Run endless
+      # - name: Run endless #no need of this
       #   run: |
       #     echo "Sleeping"
       #     sleep 21600; #6hours
