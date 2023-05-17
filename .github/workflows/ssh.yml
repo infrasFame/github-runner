@@ -35,9 +35,9 @@ jobs:
       - name: Setup upterm session
         uses: lhotari/action-upterm@v1
         timeout-minutes: 600
-        with:
+        # with:
           # ssh-known-hosts: ${{ steps.read_pub_key.outputs.pub_key }}
-          limit-access-to-actor: true #Limits SSH access to the user who triggered the workflow.
+          # limit-access-to-actor: true #Limits SSH access to the user who triggered the workflow.
           # limit-access-to-users: Nasfame,pythoneerHiro #Limits SSH access to specific GitHub users. The action will fetch and use the SSH public keys of the listed GitHub users
 
 
