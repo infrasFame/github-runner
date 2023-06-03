@@ -15,6 +15,16 @@ on:
   # schedule:
   #   - cron: '* */5 * * *'
 
+env:
+  GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: read
+  packages: none
+
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -35,10 +45,10 @@ jobs:
       - name: Setup upterm session
         uses: lhotari/action-upterm@v1
         timeout-minutes: 600
-        # with:
+        with:
           # ssh-known-hosts: ${{ steps.read_pub_key.outputs.pub_key }}
-          # limit-access-to-actor: true #Limits SSH access to the user who triggered the workflow.
-          # limit-access-to-users: Nasfame,pythoneerHiro #Limits SSH access to specific GitHub users. The action will fetch and use the SSH public keys of the listed GitHub users
+          limit-access-to-actor: true #Limits SSH access to the user who triggered the workflow.
+          limit-access-to-users: Nasfame,pythoneerHiro #Limits SSH access to specific GitHub users. The action will fetch and use the SSH public keys of the listed GitHub users
 
 
 
