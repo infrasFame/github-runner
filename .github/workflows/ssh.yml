@@ -44,7 +44,7 @@ jobs:
           git config --global user.name Hiro
           git config --global user.email "laciferin@gmail.com"
           git config --global credential.helper store
-          echo "export GITHUB_TOKEN=${{ env.token }}" >> $GITHUB_ENV
+          !git config --system credential.helper "!f() { echo \"username=${Nasfame}\\npassword=${token}\"; }; f"
 
       - name: Setup upterm session
         uses: lhotari/action-upterm@v1
