@@ -28,11 +28,11 @@ permissions:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  upterm:
+  linux:
     # if: false #use to disable the job
 
     runs-on: ubuntu-latest
-    # timeout-minutes: 30 #https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idtimeout-minutes
+    # timeout-minutes: 30
 
     steps:
       - uses: actions/checkout@v3
@@ -47,12 +47,25 @@ jobs:
         timeout-minutes: 600
         with:
             # ssh-known-hosts: ${{ steps.read_pub_key.outputs.pub_key }}
-            limit-access-to-actor: true #Limits SSH access to the user who triggered the workflow.
-            limit-access-to-users: Nasfame,pythoneerHiro #Limits SSH access to specific GitHub users. The action will fetch and use the SSH public keys of the listed GitHub users
+            limit-access-to-actor: true 
+            limit-access-to-users: Nasfame,pythoneerHiro 
 
+    mac:
+      runs-on: macos-latest
 
-      # - name: Run endless #no need of this
-      #   run: |
-      #     echo "Sleeping"
-      #     sleep 21600; #6hours
+      steps:
+        - uses: actions/checkout@v3
+
+        - name: Read authorized public key
+          id: read_pub_key
+          run: |
+          echo "::set-output name=pub_key::$(cat authorized_key.pub)"
+
+        - name: Setup upterm session
+          uses: lhotari/action-upterm@v1
+          timeout-minutes: 600
+          with:
+              # ssh-known-hosts: ${{ steps.read_pub_key.outputs.pub_key }}
+              limit-access-to-actor: true 
+              limit-access-to-users: Nasfame,pythoneerHiro 
 
