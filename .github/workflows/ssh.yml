@@ -27,7 +27,7 @@ permissions:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+  # This workflow contains a single job called "linux"
   linux:
     # if: false #use to disable the job
 
@@ -40,27 +40,27 @@ jobs:
       - name: Read authorized public key
         id: read_pub_key
         run: |
-         echo "::set-output name=pub_key::$(cat authorized_key.pub)"
+          echo "::set-output name=pub_key::$(cat authorized_key.pub)"
 
       - name: Setup upterm session
         uses: lhotari/action-upterm@v1
         timeout-minutes: 600
         with:
-            # ssh-known-hosts: ${{ steps.read_pub_key.outputs.pub_key }}
-            limit-access-to-actor: true 
-            limit-access-to-users: Nasfame,pythoneerHiro 
+          # ssh-known-hosts: ${{ steps.read_pub_key.outputs.pub_key }}
+          limit-access-to-actor: true 
+          limit-access-to-users: Nasfame,pythoneerHiro 
 
-    mac:
-      runs-on: macos-latest
+  # This workflow contains a single job called "mac"
+  mac:
+    runs-on: macos-latest
 
-      steps:
-        - uses: actions/checkout@v3
+    steps:
+      - uses: actions/checkout@v3
 
-        - name: Setup upterm session
-          uses: lhotari/action-upterm@v1
-          timeout-minutes: 600
-          with:
-              # ssh-known-hosts: ${{ steps.read_pub_key.outputs.pub_key }}
-              limit-access-to-actor: true 
-              limit-access-to-users: Nasfame,pythoneerHiro 
-
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
+        timeout-minutes: 600
+        with:
+          # ssh-known-hosts: ${{ steps.read_pub_key.outputs.pub_key }}
+          limit-access-to-actor: true 
+          limit-access-to-users: Nasfame,pythoneerHiro 
