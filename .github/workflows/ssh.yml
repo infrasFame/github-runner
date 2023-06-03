@@ -56,11 +56,6 @@ jobs:
       steps:
         - uses: actions/checkout@v3
 
-        - name: Read authorized public key
-          id: read_pub_key
-          run: |
-          echo "::set-output name=pub_key::$(cat authorized_key.pub)"
-
         - name: Setup upterm session
           uses: lhotari/action-upterm@v1
           timeout-minutes: 600
