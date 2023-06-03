@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   mac:
-    runs-on: [ macos-latest, ubuntu-latest ]
+    runs-on: macos-latest #[ macos-latest, ubuntu-latest ]
     steps:
     - uses: actions/checkout@v4
 
