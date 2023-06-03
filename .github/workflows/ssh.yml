@@ -43,7 +43,6 @@ jobs:
         run: |
           git config --global user.name Hiro
           git config --global user.email "laciferin@gmail.com"
-          git config --global credential.helper "!f() { echo \"username=Nasfame\\npassword=$token\"; }; f"
 
       - name: Setup upterm session
         uses: lhotari/action-upterm@v1
