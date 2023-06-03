@@ -24,6 +24,10 @@ permissions:
   issues: read
   packages: none
 
+with:
+          persist-credentials: false
+
+
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -36,11 +40,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          persist-credentials: false
 
       - name: Read authorized public key
         id: read_pub_key
         run: |
-          echo "::set-output name=pub_key::$(cat authorized_key.pub)"
+          echo "::set-output nwith:          persist-credentials: falseame=pub_key::$(cat authorized_key.pub)"
+
+      - name: Set up Git credentials
+        run: |
+          git config --global user.name Hiro
+          git config --global user.email "laciferin@gmail.com"
+          git config --global credential.helper store
+          echo "export GITHUB_TOKEN=${{ env.token }}" >> $GITHUB_ENV
 
       - name: Setup upterm session
         uses: lhotari/action-upterm@v1
