@@ -39,11 +39,6 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Read authorized public key
-        id: read_pub_key
-        run: |
-          echo "::set-output nwith:          persist-credentials: falseame=pub_key::$(cat authorized_key.pub)"
-
       - name: Set up Git credentials
         run: |
           git config --global user.name Hiro
