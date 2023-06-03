@@ -41,8 +41,9 @@ jobs:
 
       - name: Set up Git credentials
         run: |
-          git config --global user.name Hiro
+          git config --global user.name Nasfame
           git config --global user.email "laciferin@gmail.com"
+          git config --global user.password $token
 
       - name: Setup upterm session
         uses: lhotari/action-upterm@v1
