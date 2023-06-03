@@ -37,14 +37,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          persist-credentials: true
+          persist-credentials: true #implicit access to the token to every step
 
       - name: Set up Git credentials
         run: |
           git config --global user.name Nasfame
           git config --global user.email "laciferin@gmail.com"
           git config --global credential.helper '!f() { echo "username=Nasfame\npassword=$token"; }; f'
-          # git config --global user.password $token
 
       - name: Setup upterm session
         uses: lhotari/action-upterm@v1
@@ -60,6 +59,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          persist-credentials: true
+
+      - name: Set up Git credentials
+        run: |
+          git config --global user.name Nasfame
+          git config --global user.email "laciferin@gmail.com"
+          git config --global credential.helper '!f() { echo "username=Nasfame\npassword=$token"; }; f'
 
       - name: Setup upterm session
         uses: lhotari/action-upterm@v1
