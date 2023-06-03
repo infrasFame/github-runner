@@ -1,0 +1,31 @@
+name: MAC
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+
+jobs:
+  mac:
+    runs-on: [ macos-latest, ubuntu-latest ]
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+      with:
+        detached: true
+        limit-access-to-actor: true
+        sudo: true
+
+      timeout-minutes: 360

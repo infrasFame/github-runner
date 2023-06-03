@@ -1,9 +1,5 @@
 name: SSH
 
-# concurrency:
-#   group: ssh
-#   cancel-in-progress: true #not required as its manually triggernd
-
 on:
   push:
     branches: [ "main" ]
