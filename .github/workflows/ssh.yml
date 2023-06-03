@@ -18,15 +18,15 @@ on:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-  
+
 env:
   GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
 
-permissions:
-  contents: write
-  pull-requests: write
-  issues: read
-  packages: none
+# permissions:
+#   contents: write
+#   pull-requests: write
+#   issues: read
+#   packages: none
 
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
