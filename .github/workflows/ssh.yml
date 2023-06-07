@@ -38,6 +38,11 @@ jobs:
       - uses: actions/checkout@v3
         with:
           persist-credentials: true #implicit access to the token to every step
+      
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          check-latest: true
 
       - name: Set up Git credentials
         run: |
