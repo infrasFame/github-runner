@@ -53,8 +53,9 @@ jobs:
             copyback: true #copy files back from the VM in to the host.
             prepare: |
               pkg update
-              pkg install -y git node16 npm-node14
+              pkg install -y git node-16.10.0 npm
               node --version
+              npm -v
               git --version
               git clone https://github.com/lhotari/action-upterm.git 
               cd action-upterm
@@ -64,6 +65,7 @@ jobs:
               whoami
               env
               freebsd-version
+              npm version
               npm start
 
 
