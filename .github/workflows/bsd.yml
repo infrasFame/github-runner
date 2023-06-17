@@ -60,9 +60,7 @@ jobs:
               cd action-upterm
               npm install
             run: |
-              curl google.com
               pwd
-              ls -lah
               whoami
               env
               freebsd-version
