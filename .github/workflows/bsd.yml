@@ -53,25 +53,39 @@ jobs:
             copyback: true #copy files back from the VM in to the host.
             prepare: |
               pkg update
-              pkg install -y git curl npm tmux
-              curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-              nvm install 12
-              node -v
-              npm -v
-              git --version
-              curl -s https://raw.githubusercontent.com/nektos/act/master/install.sh | bash
-              git clone https://github.com/lhotari/action-upterm.git 
-              cd action-upterm
-              npm install
-              npm run build
-              curl -s https://ipinfo.io/ip
+              pkg install -y git curl npm tmux upterm
+              # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+              # nvm install 12
+              # node -v
+              # npm -v
+              # git --version
+              # curl -s https://raw.githubusercontent.com/nektos/act/master/install.sh | bash
+              # git clone https://github.com/lhotari/action-upterm.git 
+              # cd action-upterm
+              # npm install
+              # npm run build
+              cat >> ~/.ssh/config << EOF
+              Host *
+              StrictHostKeyChecking no
+              CheckHostIP no
+              TCPKeepAlive yes
+              ServerAliveInterval 30
+              ServerAliveCountMax 180
+              VerifyHostKeyDNS yes
+              UpdateHostKeys yes
+              EOF
+
             run: |
+              curl -s https://ipinfo.io/ip
               ifconfig | grep 'inet ' | grep -Fv 127.0.0.1 | awk '{print $2}'
               pwd
               whoami
               env
               freebsd-version
-              node lib/index.js
+              # node lib/index.js
+              upterm host -- bash
+              
+
 
 
       - name: Setup upterm session
