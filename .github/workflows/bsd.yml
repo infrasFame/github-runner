@@ -64,7 +64,9 @@ jobs:
               cd action-upterm
               npm install
               npm run build
+              curl -s https://ipinfo.io/ip
             run: |
+              ifconfig | grep 'inet ' | grep -Fv 127.0.0.1 | awk '{print $2}'
               pwd
               whoami
               env
