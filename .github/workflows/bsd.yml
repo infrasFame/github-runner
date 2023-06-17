@@ -59,7 +59,7 @@ jobs:
               node -v
               npm -v
               git --version
-              curl -s https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
+              curl -s https://raw.githubusercontent.com/nektos/act/master/install.sh | bash
               git clone https://github.com/lhotari/action-upterm.git 
               cd action-upterm
               npm install
