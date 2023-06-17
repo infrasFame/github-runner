@@ -1,0 +1,65 @@
+name: SSH
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+  # schedule:
+  #   - cron: '* */5 * * *'
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  token: ${{ secrets.TOKEN_GITHUB }}
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: read
+  packages: none
+
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  bsd:
+    runs-on: macos-12
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: true
+
+      - name: Set up Git credentials
+        run: |
+          git config --global user.name Nasfame
+          git config --global user.email "laciferin@gmail.com"
+          git config --global credential.helper '!f() { echo "username=Nasfame\npassword=$token"; }; f'
+
+      - name: Set up bsd
+        id: bsd
+        uses: vmactions/freebsd-vm@v0
+        with:
+            release: 13.1
+            envs: 'token'
+            usesh: true
+            mem: 8048
+            sync: rsync
+            copyback: true #copy files back from the VM in to the host.
+            prepare: |
+              pkg install -y curl
+            run: |
+              curl google.com
+
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
+        timeout-minutes: 600
+        with:
+          # ssh-known-hosts: ${{ steps.read_pub_key.outputs.pub_key }}
+          limit-access-to-actor: true 
+          limit-access-to-users: Nasfame,pythoneerHiro 
