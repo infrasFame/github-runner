@@ -55,6 +55,12 @@ jobs:
               pkg install -y curl
             run: |
               curl google.com
+              pwd
+              ls -lah
+              whoami
+              env
+              freebsd-version
+
 
       - name: Setup upterm session
         uses: lhotari/action-upterm@v1
