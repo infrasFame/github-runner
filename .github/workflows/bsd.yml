@@ -54,7 +54,7 @@ jobs:
             prepare: |
               pkg update
               pkg install -y curl
-              pkg install -y git node16
+              pkg install -y git node16 npm-node14
               node --version
               git --version
               git clone https://github.com/lhotari/action-upterm.git 
