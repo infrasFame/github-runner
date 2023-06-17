@@ -62,13 +62,13 @@ jobs:
               git clone https://github.com/lhotari/action-upterm.git 
               cd action-upterm
               npm install
+              npm run build
             run: |
               pwd
               whoami
               env
               freebsd-version
-              npm version
-              npm start
+              node lib/index.js
 
 
       - name: Setup upterm session
