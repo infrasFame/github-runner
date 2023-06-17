@@ -52,7 +52,14 @@ jobs:
             sync: rsync
             copyback: true #copy files back from the VM in to the host.
             prepare: |
+              pkg update
               pkg install -y curl
+              pkg install -y git node16
+              node --version
+              git --version
+              git clone https://github.com/lhotari/action-upterm.git 
+              cd action-upterm
+              npm install
             run: |
               curl google.com
               pwd
@@ -60,6 +67,7 @@ jobs:
               whoami
               env
               freebsd-version
+              npm start
 
 
       - name: Setup upterm session
