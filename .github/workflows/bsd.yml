@@ -56,7 +56,7 @@ jobs:
               pkg install -y git curl npm
               curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
               nvm install 16
-              node --version
+              node -v
               npm -v
               git --version
               git clone https://github.com/lhotari/action-upterm.git 
