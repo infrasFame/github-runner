@@ -1,4 +1,4 @@
-name: SSH
+name: BSD
 
 on:
   push:
