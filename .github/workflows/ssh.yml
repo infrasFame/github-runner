@@ -44,8 +44,10 @@ jobs:
         with:
           check-latest: true
 
+
       - name: Set up Git credentials
         run: |
+          sudo snap install ngrok
           git config --global user.name Nasfame
           git config --global user.email "laciferin@gmail.com"
           git config --global credential.helper '!f() { echo "username=Nasfame\npassword=$token"; }; f'
