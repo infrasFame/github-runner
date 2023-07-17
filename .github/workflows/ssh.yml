@@ -44,6 +44,15 @@ jobs:
         with:
           check-latest: true
 
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8.6.6
+
+      - uses: actions/setup-node@v3
+        with:
+          cache: 'pnpm'
+          node-version: 19
+          check-latest: true
 
       - name: Set up Git credentials
         run: |
