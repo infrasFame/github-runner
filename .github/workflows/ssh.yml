@@ -11,9 +11,9 @@ on:
   #   - cron: '* */5 * * *'
 
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+# concurrency:
+#   group: ${{ github.workflow }}-${{ github.ref }}
+#   cancel-in-progress: true
 
 env:
   token: ${{ secrets.TOKEN_GITHUB }}
