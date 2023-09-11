@@ -1,7 +1,7 @@
 # Default target
 install:
 	sudo snap install ngrok &
-	make install-lily 
+	make install-lily &
 	make bacalhau 
 
 install-tmux:
