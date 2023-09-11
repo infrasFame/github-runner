@@ -1,9 +1,16 @@
 # Default target
 install:
 	sudo snap install ngrok
-	cd bin 
-	make lily &
+	make lily 
 	make bacalhau 
+
+install-tmux:
+	@tmux new-session -d -s install_session \
+			"sudo snap install ngrok" \; \
+			split-window -v "make lily" \; \
+			split-window -h "make bacalhau" \; \
+			select-layout even-horizontal \; \
+			attach-session -d -t install_session
 	
 
 bacalhau:
