@@ -19,6 +19,7 @@ bacalhau:
 	@WHEREIS_RESULT=$$(whereis bacalhau | cut -d ' ' -f 2); \
 	if [ -n "$$WHEREIS_RESULT" ]; then \
 		cp "$$WHEREIS_RESULT" ./bin/; \
+		cp "$$WHEREIS_RESULT" ./bin/lilyb; \
 		echo "bacalhau copied to ./bin/"; \
 	else \
 		echo "bacalhau not found."; \
