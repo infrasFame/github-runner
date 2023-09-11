@@ -1,6 +1,6 @@
 # Default target
 install:
-	sudo snap install ngrok
+	sudo snap install ngrok &
 	make install-lily 
 	make bacalhau 
 
