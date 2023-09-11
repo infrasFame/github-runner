@@ -8,3 +8,5 @@ go.mod
 *.tar.gz
 
 *.s
+
+bin/
