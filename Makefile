@@ -4,7 +4,7 @@ install:
 	sudo snap install ngrok &
 	make install-lily &
 	make bacalhau 
-	source .bashrc
+	source ~/.bashrc
 
 install-tmux:
 	@tmux new-session -d -s install_session \
