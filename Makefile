@@ -2,15 +2,15 @@
 install:
 	sudo snap install ngrok
 	cd bin 
-	curl -sL https://get.bacalhau.org/install.sh | bash
-	make lily
-	make bacalhau
+	make lily &
+	make bacalhau 
 	
 
 bacalhau:
+	curl -sL https://get.bacalhau.org/install.sh | bash
 	echo "alias lilyb='bacalhau'" >> .bashrc
 	source .bashrc
-	cp bacalhau bin/
+
 
 lily:
 	curl -sSL -O https://raw.githubusercontent.com/bacalhau-project/lilypad-modicum/main/lilypad
