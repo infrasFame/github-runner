@@ -16,6 +16,13 @@ install-tmux:
 bacalhau:
 	curl -sL https://get.bacalhau.org/install.sh | bash
 	echo "alias lilyb='bacalhau'" >> ~/.bashrc
+	@WHEREIS_RESULT=$$(whereis bacalhau | cut -d ' ' -f 2); \
+	if [ -n "$$WHEREIS_RESULT" ]; then \
+		cp "$$WHEREIS_RESULT" ./bin/; \
+		echo "bacalhau copied to ./bin/"; \
+	else \
+		echo "bacalhau not found."; \
+	fi
 
 install-lily:
 	curl -sSL -O https://raw.githubusercontent.com/bacalhau-project/lilypad-modicum/main/lilypad
