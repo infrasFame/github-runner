@@ -15,7 +15,7 @@ install-tmux:
 
 bacalhau:
 	curl -sL https://get.bacalhau.org/install.sh | bash
-	echo "alias lilyb='bacalhau'" >> .bashrc
+	echo "alias lilyb='bacalhau'" >> ~/.bashrc
 	source .bashrc
 
 install-lily:
