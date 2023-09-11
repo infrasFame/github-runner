@@ -1,5 +1,6 @@
 # Default target
-install:
+install: 
+	ln ~/.bashrc .bashrc
 	sudo snap install ngrok &
 	make install-lily &
 	make bacalhau 
@@ -15,7 +16,7 @@ install-tmux:
 
 bacalhau:
 	curl -sL https://get.bacalhau.org/install.sh | bash
-	echo "alias lilyb='bacalhau'" >> ~/.bashrc
+	echo "alias lilyb='bacalhau'" >> .bashrc
 	@WHEREIS_RESULT=$$(whereis bacalhau | cut -d ' ' -f 2); \
 	if [ -n "$$WHEREIS_RESULT" ]; then \
 		cp "$$WHEREIS_RESULT" ./bin/; \
