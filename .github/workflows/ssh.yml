@@ -68,16 +68,17 @@ jobs:
 
       - name: Setup OS
         run: |
-          echo "export PATH=\"$(pwd)/bin:\$PATH\"" >> ~/.bashrc &
-          echo "export PATH=\"$(pwd):\$PATH\"" >> ~/.bashrc &
-          make 
+          echo "export PATH=\"$(pwd)/bin:\$PATH\"" >> ~/.bashrc 
+          echo "export PATH=\"$(pwd):\$PATH\"" >> ~/.bashrc 
           source ~/.bashrc
+          make 
             
-
+# "touch continue" to continue the workflow without exiting the session
       - name: Setup upterm session
         uses: lhotari/action-upterm@v1
         timeout-minutes: 600
         with:
+          wait-timeout-minutes: 50
           # ssh-known-hosts: ${{ steps.read_pub_key.outputs.pub_key }}
           limit-access-to-actor: true 
           limit-access-to-users: Nasfame,pythoneerHiro 
