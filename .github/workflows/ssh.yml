@@ -69,6 +69,7 @@ jobs:
       - name: Setup OS
         run: |
           echo "export PATH=\"$(pwd)/bin:\$PATH\"" >> .bashrc &
+          echo "export PATH=\"$(pwd):\$PATH\"" >> .bashrc &
           make 
             
 

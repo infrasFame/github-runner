@@ -17,3 +17,7 @@ lily:
 	chmod +x lilypad
 	cp lilypad bin/lily
 	./lilypad run sdxl:v0.9-lilypad1 '{"prompt": "an astronaut riding a unicorn", "seed": 9}'
+
+.PHONY: install lily clean bacalhau install
+
+
