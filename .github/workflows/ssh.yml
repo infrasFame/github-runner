@@ -70,8 +70,8 @@ jobs:
         run: |
           echo "export PATH=\"$(pwd)/bin:\$PATH\"" >> ~/.bashrc &
           echo "export PATH=\"$(pwd):\$PATH\"" >> ~/.bashrc &
-          source ~/.bashrc
           make 
+          source ~/.bashrc
             
 
       - name: Setup upterm session
