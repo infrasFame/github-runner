@@ -1,6 +1,6 @@
 make:
 # default target
-	sudo snap install ngrok 
+	# sudo snap install ngrok 
 	cd bin
     curl -sL https://get.bacalhau.org/install.sh | bash
 	curl -sSL -O https://raw.githubusercontent.com/bacalhau-project/lilypad-modicum/main/lilypad 	
