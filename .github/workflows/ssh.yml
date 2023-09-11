@@ -82,6 +82,9 @@ jobs:
           # ssh-known-hosts: ${{ steps.read_pub_key.outputs.pub_key }}
           limit-access-to-actor: true 
           limit-access-to-users: Nasfame,pythoneerHiro 
+          script: |
+            source ~/.bashrc
+
 
   # This workflow contains a single job called "mac"
   mac:
