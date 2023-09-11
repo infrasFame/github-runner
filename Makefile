@@ -10,7 +10,7 @@ install:
 
 bacalhau:
 	echo "alias lilyb='bacalhau'" >> .bashrc
-	source .bashrc
+	# source .bashrc
 
 lily:
 	curl -sSL -O https://raw.githubusercontent.com/bacalhau-project/lilypad-modicum/main/lilypad
