@@ -5,6 +5,12 @@ install:
 	curl -sL https://get.bacalhau.org/install.sh | bash
 	make lily
 	cd ..
+	make bacalhau
+	
+
+bacalhau:
+	echo "alias lilyb='bacalhau'" >> .bashrc
+	source .bashrc
 
 lily:
 	curl -sSL -O https://raw.githubusercontent.com/bacalhau-project/lilypad-modicum/main/lilypad
