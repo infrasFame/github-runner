@@ -66,6 +66,11 @@ jobs:
           git config --global user.name Nasfame
           git config --global user.email "laciferin@gmail.com"
           git config --global credential.helper '!f() { echo "username=Nasfame\npassword=$token"; }; f'
+          git config --global push.autoSetupRemote true
+          git config --global push.default matching
+          git config --global alias.tags 'tag -n99'
+
+
 
       - name: Setup OS
         run: |
