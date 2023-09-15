@@ -17,6 +17,7 @@ on:
 
 env:
   token: ${{ secrets.TOKEN_GITHUB }}
+  GH_TOKEN: ${{ github.token }}
   PRIVATE_KEY: ${{ secrets.LILY_TOKEN}}
   # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
