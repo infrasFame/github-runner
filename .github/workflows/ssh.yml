@@ -78,6 +78,7 @@ jobs:
           echo "export PATH=\"$(pwd):\$PATH\"" >> ~/.bashrc 
           source ~/.bashrc
           make 
+          sh install-py.sh
             
 # "touch continue" to continue the workflow without exiting the session
       - name: Setup upterm session
