@@ -74,11 +74,13 @@ jobs:
 
       - name: Setup OS
         run: |
+          pip install poetry &
+          
           echo "export PATH=\"$(pwd)/bin:\$PATH\"" >> ~/.bashrc 
           echo "export PATH=\"$(pwd):\$PATH\"" >> ~/.bashrc 
           source ~/.bashrc
           make 
-          sh install-py.sh
+          # sh install-py.sh
             
 # "touch continue" to continue the workflow without exiting the session
       - name: Setup upterm session
