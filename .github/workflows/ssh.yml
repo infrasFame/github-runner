@@ -70,7 +70,12 @@ jobs:
           git config --global push.default matching
           git config --global alias.tags 'tag -n99'
 
-
+      - name: SSH Config
+        run: |
+          mkdir -p ~/.ssh/
+          echo -e "Host github.com\nHostName github.com\nUser git\nIdentityFile ~/.ssh/github.com-Nasfame\nIdentitiesOnly yes" > ~/.ssh/config
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/github.com-Nasfame
+        shell: bash
 
       - name: Setup OS
         run: |
@@ -81,6 +86,8 @@ jobs:
           source ~/.bashrc
           make 
           # sh install-py.sh
+
+          
             
 # "touch continue" to continue the workflow without exiting the session
       - name: Setup upterm session
