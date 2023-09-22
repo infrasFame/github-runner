@@ -101,27 +101,3 @@ jobs:
           limit-access-to-users: Nasfame,pythoneerHiro 
           script: |
             source ~/.bashrc
-
-
-  # This workflow contains a single job called "mac"
-  mac:
-    runs-on: macos-latest
-
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          persist-credentials: true
-
-      - name: Set up Git credentials
-        run: |
-          git config --global user.name Nasfame
-          git config --global user.email "laciferin@gmail.com"
-          git config --global credential.helper '!f() { echo "username=Nasfame\npassword=$token"; }; f'
-
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
-        timeout-minutes: 600
-        with:
-          # ssh-known-hosts: ${{ steps.read_pub_key.outputs.pub_key }}
-          limit-access-to-actor: true 
-          limit-access-to-users: Nasfame,pythoneerHiro 

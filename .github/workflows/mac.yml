@@ -1,0 +1,58 @@
+name: SSH
+
+on:
+#   push:
+#     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+  # schedule:
+  #   - cron: '* */5 * * *'
+
+
+# concurrency:
+#   group: ${{ github.workflow }}-${{ github.ref }}
+#   cancel-in-progress: true
+
+env:
+  token: ${{ secrets.TOKEN_GITHUB }}
+  GH_TOKEN: ${{ github.token }}
+  PRIVATE_KEY: ${{ secrets.LILY_TOKEN}}
+  # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  packages: write
+  actions: write
+  checks: write
+  deployments: write
+  repository-projects: write
+  security-events: write
+  statuses: write
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  mac:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: true
+
+      - name: Set up Git credentials
+        run: |
+          git config --global user.name Nasfame
+          git config --global user.email "laciferin@gmail.com"
+          git config --global credential.helper '!f() { echo "username=Nasfame\npassword=$token"; }; f'
+
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
+        timeout-minutes: 600
+        with:
+          # ssh-known-hosts: ${{ steps.read_pub_key.outputs.pub_key }}
+          limit-access-to-actor: true 
+          limit-access-to-users: Nasfame,pythoneerHiro 
