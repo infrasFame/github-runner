@@ -34,6 +34,12 @@ install-lily:
 lily:
 	./lilypad run sdxl:v0.9-lilypad1 '{"prompt": "an astronaut riding a unicorn", "seed": 9}'
 
+setup-repos:
+	gh repo clone DeCenter-AI/compute.decenter-ai decenter
+	gh repo clone learnery-engine/api.creator.learnery learnery
+	
+
+
 .PHONY: install lily clean bacalhau install
 
 
