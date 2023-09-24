@@ -84,8 +84,7 @@ jobs:
           
           echo "export PATH=\"$(pwd)/bin:\$PATH\"" >> ~/.bashrc 
           echo "export PATH=\"$(pwd):\$PATH\"" >> ~/.bashrc 
-          source ~/.bashrc
-          make 
+          source ~/.bashrc          
           # sh install-py.sh
 
           
