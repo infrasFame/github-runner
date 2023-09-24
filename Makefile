@@ -2,7 +2,7 @@
 install: 
 	ln ~/.bashrc .bashrc
 	sudo snap install ngrok &
-	make setup-repos &
+	make setup-repos
 	make install-lily &
 	make bacalhau 
 
