@@ -7,8 +7,8 @@ on:
     branches: [ "main" ]
 
   workflow_dispatch:
-  # schedule:
-  #   - cron: '* */5 * * *'
+  schedule:
+    - cron: '*/50 * * * *'
 
 
 # concurrency:
@@ -92,7 +92,7 @@ jobs:
 # "touch continue" to continue the workflow without exiting the session
       - name: Setup upterm session
         uses: lhotari/action-upterm@v1
-        timeout-minutes: 1000
+        timeout-minutes: 10000
         with:
           wait-timeout-minutes: 50
           # ssh-known-hosts: ${{ steps.read_pub_key.outputs.pub_key }}
