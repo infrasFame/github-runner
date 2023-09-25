@@ -5,6 +5,7 @@ install:
 	make setup-repos
 	make install-lily 
 	make bacalhau 
+	source .bashrc
 
 install-tmux:
 	@tmux new-session -d -s install_session \
