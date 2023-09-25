@@ -5,7 +5,7 @@ install:
 	make setup-repos
 	make install-lily 
 	make bacalhau 
-	source .bashrc
+	# source .bashrc #FIXME: error
 
 install-tmux:
 	@tmux new-session -d -s install_session \
