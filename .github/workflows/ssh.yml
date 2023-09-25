@@ -83,7 +83,7 @@ jobs:
           pip install poetry &
           echo "export PATH=\"$(pwd)/bin:\$PATH\"" >> ~/.bashrc 
           echo "export PATH=\"$(pwd):\$PATH\"" >> ~/.bashrc 
-          make
+          make install
           source ~/.bashrc          
           # sh install-py.sh
 
