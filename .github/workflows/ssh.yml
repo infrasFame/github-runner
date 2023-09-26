@@ -58,8 +58,8 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 19
-          check-latest: true
+          node-version: '19.9.0'
+          check-latest: false
 
       - name: Set up Git credentials
         run: |
