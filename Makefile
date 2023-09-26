@@ -23,6 +23,8 @@ bacalhau:
 	if [ -n "$$WHEREIS_RESULT" ]; then \
 		cp "$$WHEREIS_RESULT" ./bin/; \
 		cp "$$WHEREIS_RESULT" ./bin/lilyb; \
+		cp "$$WHEREIS_RESULT" ~/go/bin/lilyb; \
+		cp "$$WHEREIS_RESULT" ~/go/bin/; \
 		echo "bacalhau copied to ./bin/"; \
 	else \
 		echo "bacalhau not found."; \
