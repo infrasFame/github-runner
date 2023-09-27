@@ -19,6 +19,8 @@ env:
   token: ${{ secrets.TOKEN_GITHUB }}
   GH_TOKEN: ${{ github.token }}
   PRIVATE_KEY: ${{ secrets.LILY_TOKEN}}
+  # my bad its the same private key for all eth addresses
+  # AURORA_PRIVATE_KEY: ${{secrets.AURORA_PRIVATE_KEY}}
   # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 permissions:
