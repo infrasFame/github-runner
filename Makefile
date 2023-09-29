@@ -3,6 +3,7 @@ install:
 	ln ~/.bashrc .bashrc
 	sudo snap install ngrok &
 	make setup-repos
+	make install-lily2
 	make install-lily 
 	make bacalhau 
 	# source .bashrc #FIXME: error
@@ -36,6 +37,14 @@ install-lily:
 	cp lilypad bin/lily
 	cp lilypad ~/go/bin
 	cp lilypad ~/go/bin/lily
+
+install-lily-v2:
+	curl -sSL -O https://github.com/bacalhau-project/lilypad/releases/download/v2.0.0-b7e9e04/lilypad
+	# FIXME: save as lilypad2
+	chmod +x lilypad
+	cp lilypad bin/lily2
+	cp lilypad ~/go/bin/lilypad2
+	cp lilypad ~/go/bin/lily2
 
 lily:
 	./lilypad run sdxl:v0.9-lilypad1 '{"prompt": "an astronaut riding a unicorn", "seed": 9}'
