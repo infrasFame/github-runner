@@ -3,7 +3,7 @@ install:
 	ln ~/.bashrc .bashrc
 	sudo snap install ngrok &
 	make setup-repos
-	make install-lily2
+	make install-lily-v2
 	make install-lily 
 	make bacalhau 
 	# source .bashrc #FIXME: error
