@@ -4,7 +4,7 @@ install:
 	sudo snap install ngrok &
 	make setup-repos
 	make install-lily-v2
-	make install-lily 
+	make install-lily-v1 
 	make bacalhau 
 	# source .bashrc #FIXME: error
 
@@ -31,7 +31,7 @@ bacalhau:
 		echo "bacalhau not found."; \
 	fi
 
-install-lily:
+install-lily-v1:
 	curl -sSL -O https://raw.githubusercontent.com/bacalhau-project/lilypad-modicum/main/lilypad
 	mv lilypad lilypadv1
 	chmod +x lilypadv1
