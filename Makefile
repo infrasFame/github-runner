@@ -33,11 +33,11 @@ bacalhau:
 
 install-lily:
 	curl -sSL -O https://raw.githubusercontent.com/bacalhau-project/lilypad-modicum/main/lilypad
-	mv lilypad lilypadv0
-	chmod +x lilypadv0
-	cp lilypadv0 bin/lilyv0
-	cp lilypadv0 ~/go/bin
-	cp lilypadv0 ~/go/bin/lily
+	mv lilypad lilypadv1
+	chmod +x lilypadv1
+	cp lilypadv1 bin/lilyv1
+	cp lilypadv1 ~/go/bin
+	cp lilypadv1 ~/go/bin/lily
 
 install-lily-v2:
 	# curl -sSL -O https://github.com/bacalhau-project/lilypad/releases/download/v2.0.0-b7e9e04/lilypad
