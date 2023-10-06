@@ -47,6 +47,7 @@ install-lily-v2:
 	# cp lilypad ~/go/bin/lilypad2
 	# cp lilypad ~/go/bin/lily2
 	go install github.com/bacalhau-project/lilypad@latest
+	cp ~/go/bin/lilypad  ~/go/bin/lily
 
 lily:
 	./lilypad run sdxl:v0.9-lilypad1 '{"prompt": "an astronaut riding a unicorn", "seed": 9}'
