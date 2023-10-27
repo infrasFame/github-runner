@@ -32,10 +32,13 @@ bacalhau:
 	fi
 
 install-lily-v1:
-	mkdir -p ~/install-lily-v1/bin
-	cd ~/install-lily-v1
-	curl -sSL -O https://raw.githubusercontent.com/bacalhau-project/lilypad-modicum/main/lilypad
-	mv lilypad lilypadv1
+	# echo "not installing lilyp"
+	# mkdir -p ~/install-lily-v1/bin
+	# cd ~/install-lily-v1
+	# FIXME: can conflict the setup-repos
+	# curl -sSL -O https://raw.githubusercontent.com/bacalhau-project/lilypad-modicum/main/lilypad
+	curl -sSL -o lilypadv1 https://raw.githubusercontent.com/bacalhau-project/lilypad-modicum/main/lilypad
+	# mv lilypad lilypadv1
 	chmod +x lilypadv1
 	cp lilypadv1 bin/lilyv1
 	cp lilypadv1 ~/go/bin
