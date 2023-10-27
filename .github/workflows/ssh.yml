@@ -78,29 +78,6 @@ jobs:
           git config --global push.default matching
           git config --global alias.tags 'tag -n99'
 
-      - name: Setup Ngrok 8080
-        uses: luisboto/ngrok-tunnel-action@v0.1.7.2
-        with:
-            timeout: 6h
-            port: 8080
-            ngrok_authtoken: ${{ env.NGROK_AUTHTOKEN }}
-            tunnel_type: http
-            save_url_to_filename: ngrok.md
-
-      # TODO: ngrok is unzipped and its causing https://github.com/infraFame/github-runner/actions/runs/6664603431/job/18112550774
-      - name: Remove ngrok
-        run: |
-          rm -rf ngrok
-
-      - name: Setup Ngrok 1606
-        uses: luisboto/ngrok-tunnel-action@v0.1.7.2
-        with:
-            timeout: 6h
-            port: 1606
-            ngrok_authtoken: ${{ env.NGROK_AUTHTOKEN }}
-            tunnel_type: http
-            save_url_to_filename: ngrok-1606.md
-    
       - name: SSH Config
         run: |
           mkdir -p ~/.ssh/
@@ -117,6 +94,30 @@ jobs:
           make install
           source ~/.bashrc          
           # sh install-py.sh
+
+      - name: Setup Ngrok 8080
+        uses: luisboto/ngrok-tunnel-action@v0.1.7.2
+        with:
+            timeout: 6h
+            port: 8080
+            ngrok_authtoken: ${{ env.NGROK_AUTHTOKEN }}
+            tunnel_type: http
+            save_url_to_filename: ngrok.md
+            
+      # TODO: ngrok is unzipped and its causing https://github.com/infraFame/github-runner/actions/runs/6664603431/job/18112550774
+      - name: Remove ngrok
+        run: |
+          rm -rf ngrok
+
+      - name: Setup Ngrok 1606
+        uses: luisboto/ngrok-tunnel-action@v0.1.7.2
+        with:
+            timeout: 6h
+            port: 1606
+            ngrok_authtoken: ${{ env.NGROK_AUTHTOKEN }}
+            tunnel_type: http
+            save_url_to_filename: ngrok-1606.md
+  
           
             
 # "touch continue" to continue the workflow without exiting the session
