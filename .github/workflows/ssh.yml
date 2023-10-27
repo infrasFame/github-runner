@@ -104,7 +104,7 @@ jobs:
           save_url_to_filename: ngrok.md
 
       # TODO: ngrok is unzipped and its causing https://github.com/infraFame/github-runner/actions/runs/6664603431/job/18112550774
-      - name: Remove ngrok
+      - name: Post ngrok
         run: |
           rm -rf ngrok
           # ngrok start --authtoken $NGROK_AUTHTOKEN http 8080
