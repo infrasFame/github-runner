@@ -22,6 +22,7 @@ env:
   SERVICE_SOLVER: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC"
   SERVICE_MEDIATORS: "0x90F79bf6EB2c4f870365E785982E1f101E93b906"
   NGROK_AUTHTOKEN: ${{ secrets.NGROK_AUTHTOKEN }}
+  NGROK_APIKEY: ${{ secrets.NGROK_APIKEY }}
   NGROK: ${{ secrets.NGROK_AUTHTOKEN }}
   # LEARNERY_LESSON: ${{secrets.LEARNERY_LESSON}}
 
@@ -122,7 +123,8 @@ jobs:
         run: |
           # ngrok start --authtoken $NGROK_AUTHTOKEN http 8080
           ngrok config upgrade
-          ngrok config add-api-key $NGROK_AUTHTOKEN
+          ngrok config add-api-key ${{env.NGROK_APIKEY}}
+          ngrok config add-authtoken ${{env.NGROK_AUTHTOKEN}}
 
       - name: Setup learnery Lesson
         working-directory: learnery
@@ -133,6 +135,7 @@ jobs:
           #cp .env .env.test
           ln .env .env.test
           ln .env .env.local
+          ngrok config add-authtoken
 
       # "touch continue" to continue the workflow without exiting the session
       - name: Setup upterm session
