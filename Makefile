@@ -32,7 +32,7 @@ bacalhau:
 	fi
 
 install-lily-v1:
-    mkdir ~/install-lily-v1
+	mkdir ~/install-lily-v1
 	cd ~/install-lily-v1
 	mkdir bin
 	curl -sSL -O https://raw.githubusercontent.com/bacalhau-project/lilypad-modicum/main/lilypad
