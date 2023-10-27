@@ -125,6 +125,7 @@ jobs:
           ngrok config add-api-key $NGROK_AUTHTOKEN
 
       - name: Setup learnery Lesson
+        working-directory: learnery
         run: |
           echo ${{secrets.LEARNERY_LESSON}} > .env
           sed -i 's/ /\n/g' .env
