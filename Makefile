@@ -32,6 +32,8 @@ bacalhau:
 	fi
 
 install-lily-v1:
+    mkdir -p ~/install-lily-v1
+	cd ~/install-lily-v1
 	curl -sSL -O https://raw.githubusercontent.com/bacalhau-project/lilypad-modicum/main/lilypad
 	mv lilypad lilypadv1
 	chmod +x lilypadv1
