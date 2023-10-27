@@ -78,7 +78,7 @@ jobs:
           git config --global push.default matching
           git config --global alias.tags 'tag -n99'
 
-      - name: Setup Ngrok
+      - name: Setup Ngrok 8080
         uses: luisboto/ngrok-tunnel-action@v0.1.7.2
         with:
             timeout: 6h
@@ -87,6 +87,15 @@ jobs:
             tunnel_type: http
             save_url_to_filename: ngrok.md
 
+      - name: Setup Ngrok 1606
+        uses: luisboto/ngrok-tunnel-action@v0.1.7.2
+        with:
+            timeout: 6h
+            port: 1606
+            ngrok_authtoken: ${{ env.NGROK_AUTHTOKEN }}
+            tunnel_type: http
+            save_url_to_filename: ngrok-1606.md
+    
       - name: SSH Config
         run: |
           mkdir -p ~/.ssh/
