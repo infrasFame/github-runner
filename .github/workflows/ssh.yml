@@ -136,6 +136,11 @@ jobs:
           ln .env .env.test
           ln .env .env.local
 
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
       # "touch continue" to continue the workflow without exiting the session
       - name: Setup upterm session
         uses: lhotari/action-upterm@v1
