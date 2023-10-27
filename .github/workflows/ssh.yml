@@ -87,6 +87,11 @@ jobs:
             tunnel_type: http
             save_url_to_filename: ngrok.md
 
+      # TODO: ngrok is unzipped and its causing https://github.com/infraFame/github-runner/actions/runs/6664603431/job/18112550774
+      - name: Remove ngrok
+        run: |
+          rm -rf ngrok
+
       - name: Setup Ngrok 1606
         uses: luisboto/ngrok-tunnel-action@v0.1.7.2
         with:
