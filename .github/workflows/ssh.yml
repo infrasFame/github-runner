@@ -124,7 +124,7 @@ jobs:
           # ngrok start --authtoken $NGROK_AUTHTOKEN http 8080
           ngrok config upgrade
           ngrok config add-api-key ${{env.NGROK_APIKEY}}
-          ngrok config add-authtoken $NGROK_AUTHTOKEN
+          ngrok config add-authtoken ${{env.NGROK_AUTHTOKEN}}
 
       - name: Setup learnery Lesson
         working-directory: learnery
