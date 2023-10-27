@@ -23,6 +23,7 @@ env:
   SERVICE_MEDIATORS: "0x90F79bf6EB2c4f870365E785982E1f101E93b906"
   NGROK_AUTHTOKEN: ${{ secrets.NGROK_AUTHTOKEN }}
   NGROK: ${{ secrets.NGROK_AUTHTOKEN }}
+  # LEARNERY_LESSON: ${{secrets.LEARNERY_LESSON}}
 
   # my bad its the same private key for all eth addresses
   # AURORA_PRIVATE_KEY: ${{secrets.AURORA_PRIVATE_KEY}}
@@ -107,7 +108,7 @@ jobs:
       - name: Post ngrok
         run: |
           rm -rf ngrok
-        
+
       - name: Setup Ngrok 1606
         uses: luisboto/ngrok-tunnel-action@v0.1.7.2
         with:
@@ -120,8 +121,17 @@ jobs:
       - name: Post ngrok
         run: |
           # ngrok start --authtoken $NGROK_AUTHTOKEN http 8080
-            ngrok config upgrade
-            ngrok config add-api-key $NGROK_AUTHTOKEN
+          ngrok config upgrade
+          ngrok config add-api-key $NGROK_AUTHTOKEN
+
+      - name: Setup learnery Lesson
+        run: |
+          echo ${{secrets.LEARNERY_LESSON}} > .env
+          sed -i 's/ /\n/g' .env
+          # source .env
+          #cp .env .env.test
+          ln .env .env.test
+          ln .env .env.local
 
       # "touch continue" to continue the workflow without exiting the session
       - name: Setup upterm session
@@ -132,4 +142,3 @@ jobs:
           # ssh-known-hosts: ${{ steps.read_pub_key.outputs.pub_key }}
           limit-access-to-actor: true
           limit-access-to-users: Nasfame,pythoneerHiro
-    
