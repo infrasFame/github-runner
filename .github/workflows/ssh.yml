@@ -135,7 +135,6 @@ jobs:
           #cp .env .env.test
           ln .env .env.test
           ln .env .env.local
-          ngrok config add-authtoken
 
       # "touch continue" to continue the workflow without exiting the session
       - name: Setup upterm session
