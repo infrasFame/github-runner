@@ -129,6 +129,7 @@ jobs:
       - name: Setup learnery Lesson
         working-directory: learnery
         run: |
+          git checkout feat/lesson
           echo ${{env.LEARNERY_LESSON}} > .env
           sed -i 's/ /\n/g' .env
           # source .env
