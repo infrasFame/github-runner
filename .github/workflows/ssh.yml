@@ -24,7 +24,7 @@ env:
   NGROK_AUTHTOKEN: ${{ secrets.NGROK_AUTHTOKEN }}
   NGROK_APIKEY: ${{ secrets.NGROK_APIKEY }}
   NGROK: ${{ secrets.NGROK_AUTHTOKEN }}
-  # LEARNERY_LESSON: ${{secrets.LEARNERY_LESSON}}
+  LEARNERY_LESSON: ${{secrets.LEARNERY_LESSON}}
 
   # my bad its the same private key for all eth addresses
   # AURORA_PRIVATE_KEY: ${{secrets.AURORA_PRIVATE_KEY}}
@@ -129,7 +129,7 @@ jobs:
       - name: Setup learnery Lesson
         working-directory: learnery
         run: |
-          echo ${{secrets.LEARNERY_LESSON}} > .env
+          echo ${{env.LEARNERY_LESSON}} > .env
           sed -i 's/ /\n/g' .env
           # source .env
           #cp .env .env.test
