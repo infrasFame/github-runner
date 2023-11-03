@@ -88,7 +88,7 @@ jobs:
         shell: bash
 
       - name: Setup OS
-        continue-on-error: true
+        # continue-on-error: true
         run: |
           pip install poetry &
           echo "export PATH=\"$(pwd)/bin:\$PATH\"" >> ~/.bashrc 
@@ -128,7 +128,7 @@ jobs:
           ngrok config add-authtoken ${{env.NGROK_AUTHTOKEN}}
 
       - name: Setup learnery Lesson
-        continue-on-error: true
+        # continue-on-error: true
         working-directory: learnery
         run: |
           git checkout feat/lesson
