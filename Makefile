@@ -59,7 +59,7 @@ lily:
 
 setup-repos:
 	gh repo clone DeCenter-AI/compute.decenter-ai decenter
-	gh repo clone learnery-engine/api.creator.learnery learnery
+	git clone git@github.com:learnery-engine/api.creator.learnery.git learnery
 	# gh repo clone Nasfame/lilypad-modicum modicum
 	gh repo clone bacalhau-project/lilypad
 	
