@@ -1,0 +1,135 @@
+name: Windows
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+  workflow_dispatch:
+  schedule:
+    - cron: "*/20 * * * *"
+
+# concurrency:
+#   group: ${{ github.workflow }}-${{ github.ref }}
+#   cancel-in-progress: true
+
+env:
+  token: ${{ secrets.TOKEN_GITHUB }}
+  GH_TOKEN: ${{ github.token }}
+  PRIVATE_KEY: ${{ secrets.LILY_TOKEN}}
+  WEB3_PRIVATE_KEY: ${{ secrets.LILY_TOKEN}}
+  SERVICE_SOLVER: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC"
+  SERVICE_MEDIATORS: "0x90F79bf6EB2c4f870365E785982E1f101E93b906"
+  NGROK_AUTHTOKEN: ${{ secrets.NGROK_AUTHTOKEN }}
+  NGROK_APIKEY: ${{ secrets.NGROK_APIKEY }}
+  NGROK: ${{ secrets.NGROK_AUTHTOKEN }}
+  LEARNERY_LESSON: ${{secrets.LEARNERY_LESSON}}
+
+  # my bad its the same private key for all eth addresses
+  # AURORA_PRIVATE_KEY: ${{secrets.AURORA_PRIVATE_KEY}}
+  # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  packages: write
+  actions: write
+  checks: write
+  deployments: write
+  repository-projects: write
+  security-events: write
+  statuses: write
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "linux"
+  windows:
+    # if: false #use to disable the job
+
+    runs-on: windows-latest
+    # timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: true #implicit access to the token to every step
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          check-latest: true
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8.6.6
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "19.9.0"
+          check-latest: false
+
+      - name: Set up Git credentials
+        run: |
+          git config --global user.name Nasfame
+          git config --global user.email "laciferin@gmail.com"
+          git config --global credential.helper '!f() { echo "username=Nasfame\npassword=$token"; }; f'
+          git config --global push.autoSetupRemote true
+          git config --global push.default matching
+          git config --global alias.tags 'tag -n99'
+
+      - name: SSH Config
+        run: |
+          mkdir -p ~/.ssh/
+          echo -e "Host github.com\nHostName github.com\nUser git\nIdentityFile ~/.ssh/github.com-Nasfame\nIdentitiesOnly yes" > ~/.ssh/config
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/github.com-Nasfame
+          chmod 600 ~/.ssh/config ~/.ssh/github.com-Nasfame
+        shell: bash
+
+      - name: Setup OS
+        # continue-on-error: true
+        run: |
+          pip install poetry &
+          echo "export PATH=\"$(pwd)/bin:\$PATH\"" >> ~/.bashrc 
+          echo "export PATH=\"$(pwd):\$PATH\"" >> ~/.bashrc 
+          make install
+          source ~/.bashrc          
+          # sh install-py.sh
+
+      - name: Setup Ngrok 8080
+        uses: luisboto/ngrok-tunnel-action@v0.1.7.2
+        with:
+          timeout: 6h
+          port: 8080
+          ngrok_authtoken: ${{ env.NGROK_AUTHTOKEN }}
+          tunnel_type: http
+          save_url_to_filename: ngrok.md
+
+
+      - name: Setup Ngrok 1606
+        uses: luisboto/ngrok-tunnel-action@v0.1.7.2
+        with:
+          timeout: 6h
+          port: 1606
+          ngrok_authtoken: ${{ env.NGROK_AUTHTOKEN }}
+          tunnel_type: http
+          save_url_to_filename: ngrok-1606.md
+
+      - name: Post ngrok
+        run: |
+          # ngrok start --authtoken $NGROK_AUTHTOKEN http 8080
+          ngrok config upgrade
+          ngrok config add-api-key ${{env.NGROK_APIKEY}}
+          ngrok config add-authtoken ${{env.NGROK_AUTHTOKEN}}
+
+      - name: Write environment
+        if: false 
+        shell: bash #very important cuz the pwsh is not working for echo, sed
+        run: |
+            echo $envfile > .env.tmp
+            sed 's/ /\n/g' .env.tmp > .env
+
+      - name: Setup tmate session
+        if: ${{runner.os}}==windows-latest
+        uses: mxschmitt/action-tmate@v3
