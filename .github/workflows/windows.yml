@@ -87,15 +87,6 @@ jobs:
           chmod 600 ~/.ssh/config ~/.ssh/github.com-Nasfame
         shell: bash
 
-      - name: Setup OS
-        # continue-on-error: true
-        run: |
-          pip install poetry &
-          echo "export PATH=\"$(pwd)/bin:\$PATH\"" >> ~/.bashrc 
-          echo "export PATH=\"$(pwd):\$PATH\"" >> ~/.bashrc 
-          make install
-          source ~/.bashrc          
-          # sh install-py.sh
 
       - name: Setup Ngrok 8080
         uses: luisboto/ngrok-tunnel-action@v0.1.7.2
