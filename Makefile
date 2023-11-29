@@ -6,6 +6,7 @@ install:
 	make install-lily-v2
 	make install-lily-v1 
 	make bacalhau 
+	npm install -g just-install
 	# source .bashrc #FIXME: error
 
 install-tmux:
