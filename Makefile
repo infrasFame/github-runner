@@ -4,7 +4,6 @@ install:
 	sudo snap install ngrok &
 	make setup-repos
 	make install-lily-v2
-	make install-lily-v1 
 	make bacalhau 
 	npm install -g just-install
 	# source .bashrc #FIXME: error
@@ -17,7 +16,6 @@ install-tmux:
 			select-layout even-horizontal \; \
 			attach-session -d -t install_session
 	
-
 bacalhau:
 	curl -sL https://get.bacalhau.org/install.sh | bash
 	echo "alias lilyb='bacalhau'" >> .bashrc
@@ -32,18 +30,6 @@ bacalhau:
 		echo "bacalhau not found."; \
 	fi
 
-install-lily-v1:
-	# echo "not installing lilyp"
-	# mkdir -p ~/install-lily-v1/bin
-	# cd ~/install-lily-v1
-	# FIXME: can conflict the setup-repos
-	# curl -sSL -O https://raw.githubusercontent.com/bacalhau-project/lilypad-modicum/main/lilypad
-	curl -sSL -o lilypadv1 https://raw.githubusercontent.com/bacalhau-project/lilypad-modicum/main/lilypad
-	# mv lilypad lilypadv1
-	chmod +x lilypadv1
-	cp lilypadv1 bin/lilyv1
-	cp lilypadv1 ~/go/bin
-	cp lilypadv1 ~/go/bin/lily
 
 install-lily-v2:
 	# curl -sSL -O https://github.com/bacalhau-project/lilypad/releases/download/v2.0.0-b7e9e04/lilypad
@@ -55,8 +41,6 @@ install-lily-v2:
 	go install github.com/bacalhau-project/lilypad@latest
 	cp ~/go/bin/lilypad  ~/go/bin/lily
 
-lily:
-	./lilypad run sdxl:v0.9-lilypad1 '{"prompt": "an astronaut riding a unicorn", "seed": 9}'
 
 setup-repos:
 	gh repo clone DeCenter-AI/compute.decenter-ai decenter
