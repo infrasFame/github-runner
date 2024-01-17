@@ -98,6 +98,11 @@ jobs:
           source ~/.bashrc          
           # sh install-py.sh
 
+      - name: Install GoReleaser
+        uses: goreleaser/goreleaser-action@v5
+        with:
+          install-only: true
+          
       - name: Setup Ngrok 8080
         uses: luisboto/ngrok-tunnel-action@v0.1.7.2
         with:
