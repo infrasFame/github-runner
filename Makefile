@@ -67,7 +67,8 @@ install-lily-v2:
 
 setup-repos:
 	gh repo clone DeCenter-AI/compute.decenter-ai decenter
-	git clone git@github.com:learnery-engine/api.creator.learnery.git learnery
+	gh repo clone CoopHive/hive
+	# git clone git@github.com:learnery-engine/api.creator.learnery.git learnery
 	# gh repo clone Nasfame/lilypad-modicum modicum
 	gh repo clone bacalhau-project/lilypad
 	
