@@ -112,7 +112,7 @@ jobs:
         shell: bash
 
       - name: Setup OS
-        continue-on-error: true #FIXME
+        # continue-on-error: true 
         run: | 
           pip install poetry &
           echo "export PATH=\"$(pwd)/bin:\$PATH\"" >> ~/.bashrc 
