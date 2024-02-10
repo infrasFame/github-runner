@@ -53,6 +53,11 @@ jobs:
 
     steps:
 
+      - name: Free Space Before
+        run: |
+          echo "Free space:"
+          df -h
+
       - name: Maximize build space
         uses: easimon/maximize-build-space@master
         with:
