@@ -71,14 +71,22 @@ jobs:
           remove-docker-images: true
           overprovision-lvm: true
 
-      - uses: actions/checkout@v3
-        with:
-          persist-credentials: true #implicit access to the token to every step
-
+      - name: Remove unnecessary
+        run: |
+         sudo rm -rf /usr/share/dotnet
+         sudo rm -rf /usr/local/lib/android
+         sudo rm -rf /opt/ghc
+         sudo rm -rf /opt/hostedtoolcache/CodeQL
+         sudo docker image prune --all --force
+      
       - name: Free Space
         run: |
           echo "Free space:"
           df -h
+
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: true #implicit access to the token to every step
 
       - name: Set up Go
         uses: actions/setup-go@v4
