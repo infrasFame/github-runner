@@ -52,9 +52,22 @@ jobs:
     # timeout-minutes: 30
 
     steps:
+
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 512
+          swap-size-mb: 1024
+          remove-dotnet: 'true'
+
       - uses: actions/checkout@v3
         with:
           persist-credentials: true #implicit access to the token to every step
+
+      - name: Build
+        run: |
+          echo "Free space:"
+          df -h
 
       - name: Set up Go
         uses: actions/setup-go@v4
