@@ -7,6 +7,7 @@ install:
 	make bacalhau 
 	npm install -g just-install
 	# source .bashrc #FIXME: error
+	curl -sSf https://raw.githubusercontent.com/CoopHive/hive/main/install.sh | sh -s -- all
 
 install-go:
 	go install github.com/owenthereal/goup/cmd/goup@latest
