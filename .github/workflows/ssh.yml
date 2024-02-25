@@ -151,16 +151,17 @@ jobs:
 
       #ngrok my connection limited to one
       
-      - name: Setup Ngrok 1606
-        uses: luisboto/ngrok-tunnel-action@v0.1.7.2
-        with:
-          timeout: 1m #shutdown as quicktly
-          port: 1604
-          ngrok_authtoken: ${{ env.NGROK_AUTHTOKEN }}
-          tunnel_type: http
-          save_url_to_filename: ngrok.md
+      # - name: Setup Ngrok 1606
+      #   uses: luisboto/ngrok-tunnel-action@v0.1.7.2
+      #   with:
+      #     timeout: 2m #shutdown as quicktly; FIXME: this doesn't work the action is remoing ngrok it seems like
+      #     port: 1604
+      #     ngrok_authtoken: ${{ env.NGROK_AUTHTOKEN }}
+      #     tunnel_type: http
+      #     save_url_to_filename: ngrok.md
 
       - name: Post ngrok
+        continue-on-error: true
         run: |
           # ngrok start --authtoken $NGROK_AUTHTOKEN http 8080
           ngrok config upgrade
