@@ -41,6 +41,7 @@ permissions:
   repository-projects: write
   security-events: write
   statuses: write
+  
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -93,6 +94,14 @@ jobs:
         with:
           check-latest: true
           go-version: 1.21
+
+      - name: Log in to the Container registry
+        if: false #${{ github.event.inputs.runs-on }}
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: pnpm/action-setup@v2
         with:
