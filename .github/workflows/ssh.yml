@@ -16,7 +16,9 @@ on:
 
 env:
   token: ${{ secrets.TOKEN_GITHUB }}
-  GH_TOKEN: ${{ github.token }}
+  # GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB || github.token }}
+  GH_TOKEN: ${{ secrets.TOKEN_GITHUB || github.token }} #for cli auth
+
   PRIVATE_KEY: ${{ secrets.PRIVATE_KEY}}
   WEB3_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY}}
   SERVICE_SOLVER: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC"
