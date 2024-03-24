@@ -42,7 +42,7 @@ install-tmux:
 
 bacalhau:
 	curl -sL https://get.bacalhau.org/install.sh | bash
-	echo "alias lilyb='bacalhau'" >> .bashrc
+	 ln -s /usr/local/bin/bacalhau /usr/local/bin/b
 	@WHEREIS_RESULT=$$(whereis bacalhau | cut -d ' ' -f 2); \
 	if [ -n "$$WHEREIS_RESULT" ]; then \
 		cp "$$WHEREIS_RESULT" ./bin/; \
