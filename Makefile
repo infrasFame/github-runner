@@ -72,8 +72,7 @@ setup-repos:
 	# git clone git@github.com:learnery-engine/api.creator.learnery.git learnery 
 	# gh repo clone Nasfame/lilypad-modicum modicum 
 	#gh repo clone bacalhau-project/lilypad
-	
-
+	git clone --recursive git@github.com:antFame/ant
 
 .PHONY: install lily clean bacalhau install
 
