@@ -1,6 +1,7 @@
 # Default target
 install: 
 	ln ~/.bashrc .bashrc
+	make install-ipfs &
 	sudo snap install ngrok &
 	make setup-repos
 	make install-lily-v2
@@ -76,4 +77,11 @@ setup-repos:
 
 .PHONY: install lily clean bacalhau install
 
+install-ipfs:
+	cd /tmp
+	wget https://dist.ipfs.tech/kubo/v0.27.0/kubo_v0.27.0_linux-amd64.tar.gz
+	tar -xvzf kubo_v0.27.0_linux-amd64.tar.gz
+	cd kubo
+	sudo bash install.sh
+	ipfs --version
 
