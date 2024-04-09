@@ -1,6 +1,7 @@
 # Default target
 install: 
 	ln ~/.bashrc .bashrc
+	make libp2p &
 	make install-ipfs &
 	sudo snap install ngrok &
 	make setup-repos
@@ -85,3 +86,10 @@ install-ipfs:
 	sudo bash install.sh
 	ipfs --version
 
+libp2p:
+	echo "configuring libp2p"
+	export GOBIN=/usr/local/bin
+	go install github.com/studiokaiji/libp2p-port-forward@latest
+	cd $GOBIN
+	ln -s libp2p-port-forward p2p
+	ln -s libp2p-port-forward libp2p
