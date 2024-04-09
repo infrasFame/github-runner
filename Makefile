@@ -86,10 +86,10 @@ install-ipfs:
 	sudo bash install.sh
 	ipfs --version
 
+GOBIN ?= "/usr/local/bin"
+
 libp2p:
-	echo "configuring libp2p"
-	export GOBIN=/usr/local/bin
-	go install github.com/studiokaiji/libp2p-port-forward@latest
-	cd $GOBIN
-	ln -s libp2p-port-forward p2p
-	ln -s libp2p-port-forward libp2p
+    @echo "configuring libp2p"
+    GOBIN=${GOBIN} go install github.com/studiokaiji/libp2p-port-forward@latest
+    ln -s ${GOBIN}/libp2p-port-forward ${GOBIN}/p2p
+    ln -s ${GOBIN}/libp2p-port-forward ${GOBIN}/libp2p
