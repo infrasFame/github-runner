@@ -125,17 +125,6 @@ jobs:
           ngrok config add-api-key ${{env.NGROK_APIKEY}}
           ngrok config add-authtoken ${{env.NGROK_AUTHTOKEN}}
 
-      - name: Setup learnery Lesson
-        working-directory: learnery
-        run: |
-          git checkout feat/lesson
-          echo ${{env.LEARNERY_LESSON}} > .env
-          sed -i 's/ /\n/g' .env
-          # source .env
-          #cp .env .env.test
-          ln .env .env.test
-          ln .env .env.local
-
       - uses: actions/setup-python@v4
         with:
           python-version: "3.12"
