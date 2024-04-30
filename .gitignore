@@ -11,3 +11,5 @@ go.mod
 
 bin/
 .DS_Store
+
+.env
