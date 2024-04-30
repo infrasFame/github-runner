@@ -1,15 +1,14 @@
-name: SSH
+name: Mac
 
 on:
-#   push:
-#     branches: [ "main" ]
+  #   push:
+  #     branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
   workflow_dispatch:
   # schedule:
   #   - cron: '* */5 * * *'
-
 
 # concurrency:
 #   group: ${{ github.workflow }}-${{ github.ref }}
@@ -54,5 +53,5 @@ jobs:
         timeout-minutes: 600
         with:
           # ssh-known-hosts: ${{ steps.read_pub_key.outputs.pub_key }}
-          limit-access-to-actor: true 
-          limit-access-to-users: Nasfame,pythoneerHiro 
+          limit-access-to-actor: true
+          limit-access-to-users: Nasfame,pythoneerHiro
