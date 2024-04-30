@@ -16,9 +16,11 @@ on:
 
 env:
   token: ${{ secrets.TOKEN_GITHUB }}
-  GH_TOKEN: ${{ secrets.TOKEN_GITHUB || github.token }}
-  PRIVATE_KEY: ${{ secrets.LILY_TOKEN}}
-  WEB3_PRIVATE_KEY: ${{ secrets.LILY_TOKEN}}
+  GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB || github.token }}
+  GH_TOKEN: ${{ secrets.TOKEN_GITHUB || github.token }} #for cli auth
+
+  PRIVATE_KEY: ${{ secrets.PRIVATE_KEY}}
+  WEB3_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY}}
   SERVICE_SOLVER: "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC"
   SERVICE_MEDIATORS: "0x90F79bf6EB2c4f870365E785982E1f101E93b906"
   NGROK_AUTHTOKEN: ${{ secrets.NGROK_AUTHTOKEN }}
@@ -51,6 +53,42 @@ jobs:
     # timeout-minutes: 30
 
     steps:
+      - name: Free Space Before
+        run: |
+          echo "Free space:"
+          df -h
+
+      # - name: Maximize build space
+      #   uses: easimon/maximize-build-space@master
+      #   with:
+      #     # need space in /var for Docker images
+      #     root-reserve-mb: 30000
+      #     # swap-size-mb: 1024
+      #     remove-dotnet: 'true'
+      #     remove-android: true
+      #     remove-haskell: true
+      #     remove-codeql: true
+      #     remove-docker-images: true
+      #     overprovision-lvm: true
+
+      - name: Remove unnecessary
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /opt/hostedtoolcache/CodeQL
+          sudo docker image prune --all --force &
+
+      - name: Free Space
+        run: |
+          echo "Free space:"
+          df -h
+
+      - uses: earthly/actions-setup@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          version: "latest"
+
       - uses: actions/checkout@v3
         with:
           persist-credentials: true #implicit access to the token to every step
@@ -59,6 +97,15 @@ jobs:
         uses: actions/setup-go@v4
         with:
           check-latest: true
+          go-version: 1.21
+
+      - name: Log in to the Container registry
+        if: false #${{ github.event.inputs.runs-on }}
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: pnpm/action-setup@v2
         with:
@@ -87,6 +134,7 @@ jobs:
         shell: bash
 
       - name: Setup OS
+        continue-on-error: true
         run: |
           pip install poetry &
           echo "export PATH=\"$(pwd)/bin:\$PATH\"" >> ~/.bashrc 
@@ -95,47 +143,69 @@ jobs:
           source ~/.bashrc          
           # sh install-py.sh
 
-      - name: Setup Ngrok 8080
-        uses: luisboto/ngrok-tunnel-action@v0.1.7.2
+      - name: Install GoReleaser
+        uses: goreleaser/goreleaser-action@v5
         with:
-          timeout: 6h
-          port: 8080
-          ngrok_authtoken: ${{ env.NGROK_AUTHTOKEN }}
-          tunnel_type: http
-          save_url_to_filename: ngrok.md
+          install-only: true
 
-      # TODO: ngrok is unzipped and its causing https://github.com/infraFame/github-runner/actions/runs/6664603431/job/18112550774
+      # - name: Setup Ngrok 8080
+      #   uses: luisboto/ngrok-tunnel-action@v0.1.7.2
+      #   with:
+      #     timeout: 6h
+      #     port: 8080
+      #     ngrok_authtoken: ${{ env.NGROK_AUTHTOKEN }}
+      #     tunnel_type: http
+      #     save_url_to_filename: ngrok.md
+
+      # # TODO: ngrok is unzipped and its causing https://github.com/infraFame/github-runner/actions/runs/6664603431/job/18112550774
+      # - name: Post ngrok
+      #   run: |
+      #     rm -rf ngrok
+
+      #ngrok my connection limited to one
+
+      # - name: Setup Ngrok 1606
+      #   uses: luisboto/ngrok-tunnel-action@v0.1.7.2
+      #   with:
+      #     timeout: 2m #shutdown as quicktly; FIXME: this doesn't work the action is remoing ngrok it seems like
+      #     port: 1604
+      #     ngrok_authtoken: ${{ env.NGROK_AUTHTOKEN }}
+      #     tunnel_type: http
+      #     save_url_to_filename: ngrok.md
+
       - name: Post ngrok
-        run: |
-          rm -rf ngrok
-
-      - name: Setup Ngrok 1606
-        uses: luisboto/ngrok-tunnel-action@v0.1.7.2
-        with:
-          timeout: 6h
-          port: 1606
-          ngrok_authtoken: ${{ env.NGROK_AUTHTOKEN }}
-          tunnel_type: http
-          save_url_to_filename: ngrok-1606.md
-
-      - name: Post ngrok
+        continue-on-error: true
         run: |
           # ngrok start --authtoken $NGROK_AUTHTOKEN http 8080
           ngrok config upgrade
           ngrok config add-api-key ${{env.NGROK_APIKEY}}
           ngrok config add-authtoken ${{env.NGROK_AUTHTOKEN}}
 
+      - name: Setup learnery Lesson
+        working-directory: learnery
+        run: |
+          git checkout feat/lesson
+          echo ${{env.LEARNERY_LESSON}} > .env
+          sed -i 's/ /\n/g' .env
+          # source .env
+          #cp .env .env.test
+          ln .env .env.test
+          ln .env .env.local
+
       - uses: actions/setup-python@v4
         with:
-          python-version: "3.12"
+          python-version: "3.11"
           cache: "pip"
 
       # "touch continue" to continue the workflow without exiting the session
       - name: Setup upterm session
+        env:
+          GITHUB_TOKEN: null
         uses: lhotari/action-upterm@v1
-        timeout-minutes: 10000
+        timeout-minutes: 360
         with:
-          wait-timeout-minutes: 60
           # ssh-known-hosts: ${{ steps.read_pub_key.outputs.pub_key }}
-          limit-access-to-actor: true
-          limit-access-to-users: Nasfame,pythoneerHiro
+          GITHUB_TOKEN: ${{env.GH_TOKEN}}
+          wait-timeout-minutes: 360
+          #limit-access-to-actor: true
+          limit-access-to-users: lemniscite,Nasfame,pythoneerHiro
