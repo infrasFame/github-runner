@@ -55,7 +55,8 @@ bacalhau:
 	fi
 
 setup-repos:
-	gh repo clone DeCenter-AI/compute.decenter-ai decenter
+	# gh repo clone DeCenter-AI/compute.decenter-ai decenter
+	echo "setup-repos:"
 	
 
 
