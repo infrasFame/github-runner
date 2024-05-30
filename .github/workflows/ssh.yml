@@ -26,7 +26,6 @@ env:
   NGROK_AUTHTOKEN: ${{ secrets.NGROK_AUTHTOKEN }}
   NGROK_APIKEY: ${{ secrets.NGROK_APIKEY }}
   NGROK: ${{ secrets.NGROK_AUTHTOKEN }}
-  LEARNERY_LESSON: ${{secrets.LEARNERY_LESSON}}
   # my bad its the same private key for all eth addresses
   # AURORA_PRIVATE_KEY: ${{secrets.AURORA_PRIVATE_KEY}}
   # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -181,9 +180,9 @@ jobs:
           ngrok config add-api-key ${{env.NGROK_APIKEY}}
           ngrok config add-authtoken ${{env.NGROK_AUTHTOKEN}}
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.12"
           cache: "pip"
 
       # "touch continue" to continue the workflow without exiting the session
