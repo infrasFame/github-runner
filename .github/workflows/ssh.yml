@@ -197,4 +197,4 @@ jobs:
           GITHUB_TOKEN: ${{env.GH_TOKEN}}
           wait-timeout-minutes: 360
           #limit-access-to-actor: true
-          limit-access-to-users: lemniscite,Nasfame,pythoneerHiro
+          limit-access-to-users: lemniscite,Nasfame,pythoneerHiro,laciferin2024
