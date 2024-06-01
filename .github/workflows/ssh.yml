@@ -86,6 +86,27 @@ jobs:
           echo "Free space:"
           df -h
 
+      - name: Point docker dir to /mnt for space
+        run: |
+          # Create the directory for Docker data
+          sudo mkdir /mnt/docker-data
+
+          # Stop Docker service
+          sudo systemctl stop docker
+
+          # Edit the Docker daemon configuration file
+          sudo bash -c 'cat > /etc/docker/daemon.json <<EOF
+          {
+            "data-root": "/mnt/docker-data"
+          }
+          EOF'
+
+          # Start Docker service
+          sudo systemctl start docker
+
+          # Verify the new Docker root directory
+          docker info | grep "Docker Root Dir"
+
       - uses: earthly/actions-setup@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
