@@ -121,7 +121,7 @@ jobs:
         uses: actions/setup-go@v4
         with:
           check-latest: true
-          go-version: 1.21
+          go-version: 1.22
 
       - name: Log in to the Container registry
         if: false #${{ github.event.inputs.runs-on }}

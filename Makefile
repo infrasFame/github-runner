@@ -4,9 +4,9 @@ install:
 	make libp2p &
 	make install-ipfs &
 	sudo snap install ngrok &
-	make setup-repos
-	make bacalhau 
-	npm install -g just-install
+	make setup-repos &
+	make bacalhau &
+	npm install -g just-install &
 	# source .bashrc #FIXME: error
 	# curl -sSf https://raw.githubusercontent.com/CoopHive/hive/main/install.sh | sh -s -- all
 
