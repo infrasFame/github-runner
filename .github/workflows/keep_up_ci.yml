@@ -3,12 +3,12 @@ name: Keep up the CI
 # github disables workflows if no activity for 60 days
 
 on:
-  push:
-    paths:
-      - '.github/*'
+  # push:
+  #   paths:
+  #     - '.github/*'
   workflow_dispatch:
   schedule:
-    - cron: '1 1 */10 * *'
+    - cron: '1 1 */8 * *'
 
 
 concurrency:
@@ -61,6 +61,11 @@ jobs:
       - name: "Run if no changes have been detected"
         if: steps.auto-commit.outputs.changes_detected == 'false'
         run: echo "No Changes!"
+
+      - name: Remove all other workflows
+        run: |
+          gh run list --status completed --limit 1000 | awk '/completed/ {print $1}' | xargs -n 1 gh run delete
+
 
 
           
