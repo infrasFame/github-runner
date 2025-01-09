@@ -6,6 +6,7 @@ on:
   # push:
   #   paths:
   #     - '.github/*'
+
   workflow_dispatch:
   schedule:
     - cron: '1 1 */8 * *'
@@ -63,6 +64,8 @@ jobs:
         run: echo "No Changes!"
 
       - name: Remove all other workflows
+        env: 
+          GH_TOKEN: ${{github.token}}
         run: |
           gh run list --status completed --limit 1000 | awk '/completed/ {print $1}' | xargs -n 1 gh run delete
 
