@@ -67,7 +67,7 @@ jobs:
         env: 
           GH_TOKEN: ${{github.token}}
         run: |
-          gh run list --status completed --limit 1000 | awk '/completed/ {print $1}' | xargs -n 1 gh run delete
+          gh run list --status completed --limit 1000 --json databaseId | jq -r '.[].databaseId' | xargs -n 1 gh run delete  
 
 
 
