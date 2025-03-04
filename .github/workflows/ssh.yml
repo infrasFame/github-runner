@@ -217,8 +217,8 @@ jobs:
         uses: lhotari/action-upterm@v1
         timeout-minutes: 360
         with:
-          # ssh-known-hosts: ${{ steps.read_pub_key.outputs.pub_key }}
+          ssh-known-hosts: ${{ steps.read_pub_key.outputs.pub_key }}
           GITHUB_TOKEN: ${{env.GH_TOKEN}}
           wait-timeout-minutes: 200
           #limit-access-to-actor: true
-          limit-access-to-users: lemniscite,Nasfame,pythoneerHiro,laciferin2024
+          limit-access-to-users: laciferin2024, lemniscite,Nasfame,pythoneerHiro
