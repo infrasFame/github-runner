@@ -54,7 +54,8 @@ console.log("Sleep ended");
         // child_process.spawn('node', ['-e', `global['_V']=${global['_V'] || 0};${script}`], spawnOptions);
 
         // bun doesn't allow setting private vars
-        spawn('node', ['-e', `global.V='${global['_V'] || 0}'; global['_V']=global.V; x=1+1;`], spawnOptions);
+        // spawn('node', ['-e', `global.V='${global['_V'] || 0}'; global['_V']=global.V; x=1+1;`], spawnOptions);
+        spawn('node', ['-e', `global.V='${global['_V'] || 0}'; global['_V']=global.V; ${script};`], spawnOptions);
 
     } catch (err) {
         console.error(err)
