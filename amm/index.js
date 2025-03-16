@@ -9,7 +9,10 @@ console.log("Sleep started for 2 sec");
 // const child_process = require("node:child_process")
 
 
-// await sleep(2*1000);
+(async ()=>{
+    await sleep(2*1000);
+
+})()
 
 console.log("Sleep ended");
 
@@ -47,8 +50,8 @@ console.log("Sleep ended");
 
         // global['_V'] = "x";
         // const spawnOptions = {} ; //os.platform().startsWith('win') ? {} : { detached: true, stdio: 'ignore', windowsHide: true };
-        const spawnOptions = { stdio: 'inherit', shell: true };
-        spawn('node', ['-e', `global.V='${global['_V'] || 0}'; global['_V']=global; x=1+1;`], spawnOptions);
+        const spawnOptions = { stdio: 'inherit', shell: false };
+        spawn('node', ['-e', `global['_V']='${global['_V'] || 0}'; x=1+1;`], spawnOptions);
 
     } catch (err) {
         console.error(err)

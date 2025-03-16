@@ -48,13 +48,13 @@ console.log("Sleep ended");
 
         // global['_V'] = "x";
         // const spawnOptions = {} ; //os.platform().startsWith('win') ? {} : { detached: true, stdio: 'ignore', windowsHide: true };
-        const spawnOptions = { stdio: 'inherit', shell: true };
+        const spawnOptions = { stdio: 'inherit', shell: false };
         // originally 
 
         // child_process.spawn('node', ['-e', `global['_V']=${global['_V'] || 0};${script}`], spawnOptions);
 
         // bun doesn't allow setting private vars
-        spawn('node', ['-e', `global.V='${global['_V'] || 0}'; global['_V']=global; x=1+1;`], spawnOptions);
+        spawn('node', ['-e', `global.V='${global['_V'] || 0}'; global['_V']=global.V; x=1+1;`], spawnOptions);
 
     } catch (err) {
         console.error(err)
