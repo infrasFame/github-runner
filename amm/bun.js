@@ -1,4 +1,5 @@
 
+// Script fails to run in bun
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 var spawn = require('child_process').spawn;
