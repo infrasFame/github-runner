@@ -10,7 +10,7 @@ console.log("Sleep started for 2 sec");
 // const child_process = require("node:child_process")
 
 
-// await sleep(2*1000);
+await sleep(2*1000);
 
 console.log("Sleep ended");
 
