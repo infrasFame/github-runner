@@ -1,0 +1,76 @@
+# Project Context: A2M2 Frontend Development
+
+You are a senior frontend engineer tasked with developing a production-ready frontend for a Quantum One-Time Atomic Swap AMM. This is a next-generation DEX interface that features a dual UI mode (Basic and Advanced) built with Next.js, TypeScript, and Tailwind CSS.
+
+## Technical Requirements
+
+- Next.js 15 with App Router
+- TypeScript with strict mode
+- Tailwind CSS for styling
+- Use `bun` as the package manager
+- Production-grade code with:
+  - Proper error handling
+  - TypeScript types/interfaces
+  - Performance optimization
+  - Responsive design
+  - Accessibility compliance
+  - Comprehensive testing
+  - Clean, maintainable code structure
+
+## Development Guidelines
+
+1. Follow the attached PRD for feature specifications (Cursor Notepad "AAMM PRD")
+2. Reference the development checklist for task progression (Cursor Notepad "Development Checklist")
+3. Implement proper error boundaries and fallbacks
+4. Include TypeScript types for all components and functions
+5. Add JSDoc comments for complex logic
+6. Implement proper loading and error states
+7. Follow accessibility guidelines (WCAG 2.1)
+8. Optimize for performance (lazy loading, code splitting)
+9. Follow proper Git commit conventions
+
+## Code Quality Requirements
+
+1. TypeScript:
+   - No 'any' types unless absolutely necessary
+   - Proper interface/type definitions
+   - Strict null checks
+
+2. React:
+   - Functional components with hooks
+   - Proper memo/callback usage
+   - Error boundaries
+   - Suspense boundaries
+
+3. Styling:
+   - Use Tailwind's utility classes
+   - Follow responsive design principles
+   - Maintain consistent spacing/layout
+   - Support light mode and dark mode
+
+4. Performance:
+   - Lazy loading for routes
+   - Image optimization
+   - Code splitting
+   - Bundle size optimization
+
+## Repository Structure
+
+Follow this structure for organizing code:
+
+```typescript
+src/
+  app/                    // Next.js app router pages
+  components/
+    basic/               // Basic mode components
+    advanced/            // Advanced mode components
+    shared/             // Shared components
+    ui/                 // Base UI components
+  hooks/                // Custom hooks
+  context/              // React context providers
+  services/             // API/WebSocket services
+  utils/                // Utility functions
+  types/                // TypeScript types/interfaces
+  styles/               // Global styles
+  constants/            // Constants and configurations
+  tests/                // Test utilities and mocks
