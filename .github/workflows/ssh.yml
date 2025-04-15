@@ -108,10 +108,10 @@ jobs:
           # Verify the new Docker root directory
           docker info | grep "Docker Root Dir"
 
-      - uses: earthly/actions-setup@v1
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          version: "latest"
+      # - uses: earthly/actions-setup@v1
+      #   with:
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     version: "latest"
 
       - uses: actions/checkout@v3
         with:
@@ -121,7 +121,6 @@ jobs:
         uses: actions/setup-go@v4
         with:
           check-latest: true
-          go-version: 1.22
 
       - name: Log in to the Container registry
         if: false #${{ github.event.inputs.runs-on }}
@@ -167,10 +166,10 @@ jobs:
           source ~/.bashrc          
           # sh install-py.sh
 
-      - name: Install GoReleaser
-        uses: goreleaser/goreleaser-action@v5
-        with:
-          install-only: true
+      # - name: Install GoReleaser
+      #   uses: goreleaser/goreleaser-action@v5
+      #   with:
+      #     install-only: true
 
       # - name: Setup Ngrok 8080
       #   uses: luisboto/ngrok-tunnel-action@v0.1.7.2
